@@ -41,7 +41,7 @@ class PARCnet:
         self.ar_model = ARModel(ar_order, ar_diagonal_load)
 
         # Load the pretrained neural network
-        self.neural_net = HybridModel.load_from_checkpoint(model_checkpoint, channels=1, lite=True).to(device)
+        self.neural_net = HybridModel.load_from_checkpoint(model_checkpoint, map_location=device, channels=1, lite=True)
 
     def __call__(self, input_signal: np.ndarray, trace: np.ndarray, **kwargs) -> np.ndarray:
         self.neural_net.eval()
